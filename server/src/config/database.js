@@ -1,4 +1,12 @@
 const mongoose = require("mongoose");
+const dns = require("dns");
+
+// Ensure MongoDB Atlas SRV records resolve cleanly across all ISP and local DNS environments
+try {
+  dns.setServers(["8.8.8.8", "8.8.4.4", "1.1.1.1"]);
+} catch (dnsErr) {
+  // Ignore if custom DNS cannot be set
+}
 
 const connectDatabase = async () => {
   try {
